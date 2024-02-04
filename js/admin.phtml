@@ -1,0 +1,158 @@
+<?php
+
+session_start();
+include "cores/connect.php";
+
+?>
+
+<?php if(!empty($_SESSION['auth'])): ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleadm.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Admin</title>
+</head>
+<body>
+
+    <div class="modal none">
+        <div class="modal-content">
+          <h2>Добавить книгу</h2>
+          <form action="handler/addBook.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="file" id="">
+            </div>
+            <div class="form-group">
+              <input required type="text" class="form-control" id="title" name="title" placeholder="Название книги">
+            </div>
+            <div class="form-group">
+              <input required type="number" class="form-control" id="price" name="price" placeholder="Цена">
+            </div>
+            <div class="form-group">
+                <label for="category">( 1-Фэнтези, 2-Ужасы, 3-Детективы, 4-Драмма )</label>
+              <input required pattern="[1-4]" type="number" class="form-control" id="category" name="category" placeholder="Категория">
+            </div>
+            <div class="form-group">
+              <textarea required class="form-control" id="description" name="description" placeholder="Описание"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+          </form>
+          <p class="exit-modal">x</p>
+        </div>
+    </div>
+
+    <?php 
+        $id = $_GET['id'];
+        $stmt = $connect->prepare("SELECT * FROM books WHERE id = ?");
+        $stmt->execute([$id]);
+        $product = $stmt->fetch();
+    ?>
+
+    <div class="modal-update none">
+        <div class="modal-content-update">
+          <h2>Изменение</h2>
+          <form action="handler/updateBook.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="number" class="form-control" id="id" name="idUpd" placeholder="ID">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" name="titleUpd" placeholder="Название книги">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="file">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="price" name="priceUpd" placeholder="Цена">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="description" name="descriptionUpd" placeholder="Описание"></textarea>
+                </div>
+            <button type="submit" class="btn btn-primary">Изменить</button>
+          </form>
+          <p class="exit-modal-update">x</p>
+        </div>
+      </div>
+
+
+      
+
+
+    <header>
+        <nav>
+            <div class="container container_menu">
+                <div class="title">
+                    <h2>BookShop</h2>
+                </div>
+                <div class="login">
+                    <p><?php echo($_SESSION['login']); ?></p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="title-admin">Управление товаром</h2>
+        <div class="container container-button">
+            <div class="button-add button-add-product">
+                <a class="add-book-link">Добавить товар</a>
+            </div>
+        </div>
+        <div class="container container-books">
+            <div class="block-books">
+                <div class="cards-books">
+                    <?php
+                    $page_id = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+
+                    if($page_id === 1){
+                        $stmt = $connect->prepare("SELECT id,img,name,price FROM books LIMIT 10");
+                        $stmt->execute();
+                    } elseif ($page_id === 2){
+                        $stmt = $connect->prepare("SELECT id,img,name,price FROM books LIMIT 10 OFFSET 10");
+                        $stmt->execute();
+                    } elseif ($page_id === 3){
+                        $stmt = $connect->prepare("SELECT id,img,name,price FROM books LIMIT 10 OFFSET 20");
+                        $stmt->execute();
+                    }
+
+                    foreach ($stmt->fetchAll() as $row) {
+                        echo '<div class="card-book">';
+                        echo '<div class="img-book">';
+                        echo '<img src="img/card/' . $row['img'] . '" alt="">';
+                        echo '</div>';
+                        echo '<div class="title-book">';
+                        echo '<h2>' . $row['name'] . '</h2>';
+                        echo '<p class="id-book"> ID = '.$row['id'].'<p>';
+                        echo '</div>';
+                        echo '<a class="updateLink" data-productId=""' . $row['id'] . ' href="">Изменить</a>';
+                        echo '          <form  class="form-delete" action="handler/deleteBook.php" method="get">
+                        <a href="handler/deleteBook.php?id='.$row['id'].'" class="btn-delete">Удалить</a>
+                      </form>';
+                        echo '</div>';
+                    }                    
+                    ?>
+                </div>
+                <div class="pages">
+                    <a href="admin.phtml?page=1">1</a>
+                    <a href="admin.phtml?page=2">2</a>
+                    <a href="admin.phtml?page=3">3</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/e841cfff06.js" crossorigin="anonymous"></script>
+<script src="js/admin.js"></script>
+    
+</body>
+</html>
+
+<?php endif; ?>

@@ -1,0 +1,266 @@
+<?php
+
+session_start();
+include "cores/connect.php";
+include "cores/funcs.php";
+
+$books = get_products();
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo/logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Главная</title>
+</head>
+<body>
+    <section class="modal__signin none">
+
+        <div class="container container__signin">
+            <div class="exit"><i class="fa-regular fa-circle-xmark"></i></div>
+            <div class="title__signin">Вход</div>
+            <form class="form__signin" method='post' action="handler/auth.php">
+
+                <p class="text__signin">Логин</p>
+                <input required class="inp__signin" type="text" name="loginAuth">
+
+                <p class="text__signin">Пароль</p>
+                <input required class="inp__signin" type="password" name="passAuth">
+
+                <div class="btn">
+                    <button class="login">Войти</button>
+                </div>
+
+                <p class="text__noneacc">Если у вас нет аккаунта, можете пройти <span class="registration">регистрацию</span></p>
+            </form>
+        </div>
+
+
+    </section>
+
+    <section class="modal__login none">
+
+        <div class="container container__signin">
+            <div class="exit2"><i class="fa-regular fa-circle-xmark"></i></div>
+            <div class="title__signin">Регистрация</div>
+            <form class="form__signin" action="handler/registration.php" method="POST">
+
+                <p class="text__signin">Логин</p>
+                <input required class="inp__signin" type="text" name="loginReg" id="">
+
+                <p class="text__signin">Пароль</p>
+                <input required class="inp__signin" type="password" name="passReg" id="">
+
+                <p class="text__signin">Почта</p>
+                <input required class="inp__signin" type="email" name="mailReg" id="">
+
+                <div class="btn">
+                    <button class="login">Регистрация</button>
+                </div>
+
+                <p class="text__noneacc">Если у вас есть аккаунт, можете <span class="login__inmodal">войти</span></p>
+            </form>
+        </div>
+
+
+    </section>
+
+
+<section class="carts none cart-modal" id="cart-modal">
+    <div class="container container__cart">
+        <div class="exit__cart"><i class="fa-regular fa-circle-xmark"></i></div>
+        <h3 class="title__cart">Корзина</h3>
+        <div class="container-cartitem">
+            <div class="modal-cart-content">
+
+            </div>
+            
+    </div>
+</section>
+
+    <header>
+        <nav>
+            <div class="container container__menu">
+                <a href="index.phtml"><h2 class="title__logo">Book Universe</h2></a>
+                <form class="form-search" action="handler/search.php" method="get">
+                <input class="search" type="search" placeholder="Поиск" name="query" id="">
+                <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="links__menu">
+                    <div class="genre_block">
+                        <a class="genre" href="">Жанр <i class="arrow fa-solid fa-chevron-down"></i></a>
+                        <section class="section__genre none">
+
+                            <div class="container container__genre">
+                                <div class="class__genre">
+                                    <a class="fan__genre" href="handler/search-link-category.php?category=1" name="category[]">Фэнтези</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="hor__genre" href="handler/search-link-category.php?category=2" name="category[]">Ужасы</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="det__genre" href="handler/search-link-category.php?category=3" name="category[]">Детективы</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="dram__genre" href="handler/search-link-category.php?category=4" name="category[]">Драмма</a>
+                                </div>
+                            </div>
+                        
+                        </section>
+                    </div>
+                    <a href="#footer">Контакты</a>
+                    <?php if(!empty($_SESSION['auth'])): ?>
+                        <?php if(!empty($_SESSION['admin'])): ?>
+                            <a href="signinadmins.phtml" style = "color: rgb(233, 3, 3);"><?php echo($_SESSION['login']); ?></a>
+                            <form style="margin-left: 10px;" action="handler/exit.php" method="post">
+                                <button class="exit_btn">Выход</button>
+                            </form>
+                        <?php else: ?>
+                            <a style = "color: black;"><?php echo($_SESSION['login']); ?></a>
+                            <form style="margin-left: 10px;" action="handler/exit.php" method="post">
+                                <button class="exit_btn">Выход</button>
+                            </form>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="link_login">
+                        <a class="link__signin" href="">Вход</a>
+                        </div>
+                    <?php endif; ?>
+                    <a class="cart" id="get-cart" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section class="banner">
+            <div class="background"></div>
+            <div class="container container__banner">
+                <div class="descrip__banner">
+                    <h2 class="title">Book Universe</h2>
+                    <p class="text__banner">Интернет-Магазин книг.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card__top">
+            <div class="container container__cardtop">
+                <h2 class="title__card">Топ книг</h2>
+                <div class="all__cards">
+                <?php if(!empty($books)): ?>
+                    <?php foreach($books as $product): ?>
+                    <div class="cards__block">
+                        <img id="card-img" src="img/card/<?= $product['img'] ?>">
+                        <h3 class="card-title"><a style="color: black;" href="pages/product.phtml?id=<?= $product['id'] ?>"><?= $product['name'] ?></a></h3>
+                        <p><i class="fa-regular fa-star"></i><?= $product['rating'] ?></p>
+                        <p id="price" class="price"><?= $product['price'] ?>$</p>
+                        
+                        <a href="?cart=add&id=<?= $product['id']?>" class="btn__buy add-to-cart" data-id="<?= $product['id']?>">Купить</a>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </div>
+            </div>
+        </section>
+
+        <section class="bestseller">
+            <div class="container container__bestseller">
+
+                <div class="oversize none hp__over">
+                    <div class="desc">
+                        <h3 class="title__bestseller">Дж. К. <br> Роулинг</h3>
+                        <p>Жизнь десятилетнего Гарри Поттера нельзя назвать сладкой: родители умерли, едва ему исполнился год, а от дяди и тёти, взявших сироту на воспитание, достаются лишь тычки да подзатыльники. Но в одиннадцатый день рождения Гарри всё меняется. Странный гость, неожиданно появившийся на пороге, приносит письмо, из которого мальчик узнаёт, что на самом деле он - волшебник и зачислен в школу магии под названием Хогвартс. А уже через пару недель Гарри будет мчаться в поезде Хогвартс-экспресс навстречу новой жизни, где его ждут невероятные приключения, верные друзья и самое главное — ключ к разгадке тайны смерти его родителей.</p>
+                    </div>
+                    <div class="photo">
+                        <img class="cover" src="img/card/HP1.jpg" alt="Гарри Поттер и Философский Камень">
+                    </div>
+                </div>
+
+                <div class="oversize none lordrings__over">
+                    <div class="desc">
+                        <h3 class="title__bestseller">Дж. Р. Р. <br> Толкин</h3>
+                        <p>Сказания о Средиземье — это хроника Великой войны за Кольцо, длившейся не одну тысячу лет. Тот, кто владел Кольцом, получал неограниченную власть, но был обязан служить злу. Тихая деревня, где живут хоббиты. Придя на 111-й день рождения к своему старому другу Бильбо Бэггинсу, волшебник Гэндальф начинает вести разговор о кольце, которое Бильбо нашел много лет назад. Это кольцо принадлежало когда-то темному властителю Средиземья Саурону, и оно дает большую власть своему обладателю. Теперь Саурон хочет вернуть себе власть над Средиземьем. Бильбо отдает Кольцо племяннику Фродо, чтобы тот отнёс его к Роковой Горе и уничтожил.</p>
+                    </div>
+                    <div class="photo">
+                        <img class="cover" src="img/card/lordrings1.jpg" alt="Гарри Поттер и Философский Камень">
+                    </div>
+                </div>
+
+                <div class="oversize gamethrone__over">
+                    <div class="desc">
+                        <h3 class="title__bestseller">Дж. Р. Р. <br> Мартин</h3>
+                        <p>К концу подходит время благоденствия, и лето, длившееся почти десятилетие, угасает. Вокруг средоточия власти Семи королевств, Железного трона, зреет заговор, и в это непростое время король решает искать поддержки у друга юности Эддарда Старка. В мире, где все — от короля до наемника — рвутся к власти, плетут интриги и готовы вонзить нож в спину, есть место и благородству, состраданию и любви. Между тем никто не замечает пробуждение тьмы из легенд далеко на Севере — и лишь Стена защищает живых к югу от нее.</p>
+                    </div>
+                    <div class="photo">
+                        <img class="cover" src="img/card/gamethrone.jpg" alt="Гарри Поттер и Философский Камень">
+                    </div>
+                </div>
+
+                <div class="oversize none sumerki__over">
+                    <div class="desc">
+                        <h3 class="title__bestseller">Стэфани <br> Майер</h3>
+                        <p>Семнадцатилетняя девушка Белла переезжает к отцу в небольшой городок Форкс. Она влюбляется в загадочного одноклассника, который, как оказалось, происходит из семьи вампиров, отказавшихся от нападений на людей. Влюбиться в вампира. Это страшно? Это романтично, это прекрасно и мучительно, но это не может кончиться добром, особенно в вечном противостоянии вампирских кланов, где малейшее отличие от окружающих уже превращает вас во врага.</p>
+                    </div>
+                    <div class="photo">
+                        <img class="cover" src="img/card/twilight.jpg" alt="Гарри Поттер и Философский Камень">
+                    </div>
+                </div>
+
+                <div class="minisize">
+                    <div class="card-mini">
+                        <img class="cover__mini hp__mini" src="img/card/HP1.jpg" alt="Гарри Поттер и Философский камень">
+                        <h3>Гарри Поттер</h3>
+                    </div>
+                    <div class="card-mini">
+                        <img class="cover__mini lordrings__mini" src="img/card/lordrings1.jpg" alt="Властелин Колец Братство Кольца">
+                        <h3>Властелин Колец</h3>
+                    </div>
+                    <div class="card-mini">
+                        <img class="cover__mini gamethrone__mini" src="img/card/gamethrone.jpg" alt="Игра Престолов">
+                        <h3>Игра Престолов</h3>
+                    </div>
+                    <div class="card-mini">
+                        <img class="cover__mini sumerki__mini" src="img/card/twilight.jpg" alt="Сумерки">
+                        <h3>Сумерки</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container container__footer">
+            <a href="index.phtml"><h2 class="title__footer">Book Universe</h2></a>
+            <div class="contacts">
+                <p class="text__contacts">Телефон: +0(000)000-00-00</p>
+                <br><br>
+                <p class="text__contacts">Почта: email@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/e841cfff06.js" crossorigin="anonymous"></script>
+<script src="js/genre.js"></script>
+<script src="js/signin.js"></script>
+<script src="js/bestseller.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/validate.js"></script>
+
+</body>
+</html>

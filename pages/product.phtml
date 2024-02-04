@@ -1,0 +1,215 @@
+<?php
+error_reporting(-1);
+session_start();
+include "../cores/connect.php";
+include "../cores/funcs.php";
+$products = get_products();
+
+// $id = $_GET['id'];
+// $stmt = $pdo->prepare("SELECT * FROM reviews WHERE product_id = ?");
+// $stmt->execute([$id]);
+// $reviews = $stmt->fetchAll();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/logo/logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Главная</title>
+</head>
+<body>
+    <section class="modal__signin none">
+
+        <div class="container container__signin">
+            <div class="exit"><i class="fa-regular fa-circle-xmark"></i></div>
+            <div class="title__signin">Вход</div>
+            <form class="form__signin" method='post' action="handler/auth.php">
+
+                <p class="text__signin">Логин</p>
+                <input required class="inp__signin" type="text" name="loginAuth">
+
+                <p class="text__signin">Пароль</p>
+                <input required class="inp__signin" type="password" name="passAuth">
+
+                <div class="btn">
+                    <button class="login">Войти</button>
+                </div>
+
+                <p class="text__noneacc">Если у вас нет аккаунта, можете пройти <span class="registration">регистрацию</span></p>
+            </form>
+        </div>
+
+
+    </section>
+
+    <section class="modal__login none">
+
+        <div class="container container__signin">
+            <div class="exit2"><i class="fa-regular fa-circle-xmark"></i></div>
+            <div class="title__signin">Регистрация</div>
+            <form class="form__signin" action="handler/registration.php" method="POST">
+
+                <p class="text__signin">Логин</p>
+                <input required class="inp__signin" type="text" name="loginReg" id="">
+
+                <p class="text__signin">Пароль</p>
+                <input required class="inp__signin" type="password" name="passReg" id="">
+
+                <p class="text__signin">Почта</p>
+                <input required class="inp__signin" type="email" name="mailReg" id="">
+
+                <div class="btn">
+                    <button class="login">Регистрация</button>
+                </div>
+
+                <p class="text__noneacc">Если у вас есть аккаунт, можете <span class="login__inmodal">войти</span></p>
+            </form>
+        </div>
+
+
+    </section>
+
+
+<section class="carts none">
+    <div class="container container__cart">
+        <div class="exit__cart"><i class="fa-regular fa-circle-xmark"></i></div>
+        <h3 class="title__cart">Корзина</h3>
+        <div class="container-cartitem">
+            
+        </div>
+        <div class="title__total">Total:</div>
+
+        <div class="btn__buy">
+            <button>Купить</button>
+        </div>
+    </div>
+</section>
+
+    <header>
+        <nav>
+            <div class="container container__menu">
+                <a href="../index.phtml"><h2 class="title__logo">Book Universe</h2></a>
+                <form class="form-search" action="../handler/search.php" method="get">
+                <input class="search" type="search" placeholder="Поиск" name="query" id="">
+                <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="links__menu">
+                    <div class="genre_block">
+                        <a class="genre" href="">Жанр <i class="arrow fa-solid fa-chevron-down"></i></a>
+                        <section class="section__genre none">
+
+                            <div class="container container__genre">
+                                <div class="class__genre">
+                                    <a class="fan__genre" href="pages/Fantasy.html">Фэнтези</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="hor__genre" href="pages/horror.html">Ужасы</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="det__genre" href="pages/detective.html">Детективы</a>
+                                </div>
+                                <div class="class__genre">
+                                    <a class="dram__genre" href="pages/dramma.html">Драмма</a>
+                                </div>
+                            </div>
+                        
+                        </section>
+                    </div>
+                    <a href="#footer">Контакты</a>
+                    <?php if(!empty($_SESSION['auth'])): ?>
+                        <?php if(!empty($_SESSION['admin'])): ?>
+                            <a href="signinadmins.phtml" style = "color: rgb(233, 3, 3);"><?php echo($_SESSION['login']); ?></a>
+                            <form style="margin-left: 10px;" action="handler/exit.php" method="post">
+                                <button class="exit_btn">Выход</button>
+                            </form>
+                        <?php else: ?>
+                            <a style = "color: black;"><?php echo($_SESSION['login']); ?></a>
+                            <form style="margin-left: 10px;" action="handler/exit.php" method="post">
+                                <button class="exit_btn">Выход</button>
+                            </form>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="link_login">
+                        <a class="link__signin" href="">Вход</a>
+                        </div>
+                    <?php endif; ?>
+                    <a class="cart" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+       <section>
+        <div class="container container_product">
+            <?php 
+            $id = $_GET['id'];
+            $stmt = $connect->prepare("SELECT * FROM books WHERE id = ?");
+            $stmt->execute([$id]);
+            $product = $stmt->fetch();
+            ?>
+                <div class="big_photo_product">
+                    <img src="../img/card/<?= $product['img'] ?>" alt="">
+                </div>
+                <div class="about_books">
+                    <div class="block_text">
+                        <div class="title_books">
+                            <h2><?= $product['name'] ?></h2>
+                        </div>
+                        <div class="text_books">
+                            <p><?= $product['description'] ?></p>
+                        </div>
+                    </div>
+                    <div class="btn_buy">
+                        <button id="btn-buy" class="btn__card">Купить</button>
+                    </div>
+                </div>
+            </div>
+       </section>
+            <div class="container container_rating">
+                <div class="rating">
+                    <h3>Оцените книгу</h3>
+                </div>
+                <form action="../handler/addRating.php?id=<?= $product['id'] ?>" method="post">
+                    <input pattern="[1-5]" required type="text" class = "rating-input" name="ratingUser" placeholder="От 1 До 5">
+                    <button>Добавить оценку</button>
+                </form>
+            </div>                       
+       <section>
+        
+       </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container container__footer">
+            <a href="../index.phtml"><h2 class="title__footer">Book Universe</h2></a>
+            <div class="contacts">
+                <p class="text__contacts">Телефон: +0(000)000-00-00</p>
+                <br><br>
+                <p class="text__contacts">Почта: email@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/e841cfff06.js" crossorigin="anonymous"></script>
+<script src="../js/genre.js"></script>
+<script src="../js/signin.js"></script>
+<script src="../js/bestseller.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/validate.js"></script>
+</body>
+</html>

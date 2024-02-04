@@ -1,0 +1,740 @@
+/* Root */
+
+*{
+    scroll-behavior: smooth;
+}
+
+.container{
+    padding: 0 10%;
+}
+
+.none{
+    display: none !important
+}
+
+/* Menu */
+
+.container__menu{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    align-items: center;
+}
+
+.links__menu{
+    display: flex;
+}
+
+.links__menu a{
+    margin-left: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.title__logo{
+    font-size: 42px;
+    cursor: pointer;
+    color: black;
+}
+
+.genre i{
+    font-size: 12px;
+    transition: 0.5s;
+}
+
+.genre:hover i{
+    transform: rotate(-180deg);
+}
+
+.search{
+    font-family:'Advent Pro', sans-serif;
+    width: 400px;
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+    outline: none;
+    border: 1px solid rgb(210, 210, 210);
+}
+
+.arrow__upper{
+    transform: rotate(-180deg);
+}
+
+/* Product */
+
+.big_photo_product img{
+    width: 400px;
+}
+
+.btn_buy button{
+    width: 150px;
+    height: 50px;
+    background: rgb(115, 0, 255);
+    color: white;
+}
+
+.btn_buy{
+    display: flex;
+    justify-content: end;
+}
+
+.container_product{
+    display: flex;
+}
+
+.about_books{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about_books h2{
+    font-size: 46px;
+}
+
+.about_books p{
+    font-size: 21px;
+    margin-top: 20px;
+}
+
+.container_rating{
+    padding-top: 40px ;
+    padding-bottom: 40px;
+}
+
+.container_rating h3{
+    font-size: 42px;
+}
+
+.container_rating form{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.container_rating form button{
+    width: 150px;
+    height: 40px;
+    background: rgb(115, 0, 255);
+    color: white;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    font-size: 16px;
+    font-family:'Advent Pro', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.container_rating form input{
+    width: 110px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* modal-sign */
+
+.modal__signin{
+    width: 500px;
+    height: 420px;
+    border: 1px solid rgb(210, 210, 210);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    border-radius: 10px;
+    z-index: 2;
+    background: #fff;
+}
+
+.title__signin{
+    font-size: 28px;
+    font-weight: 800;
+    padding-top: 25px;
+    text-align: center;
+}
+
+.container__signin{
+    display: flex;
+    flex-direction: column;
+}
+
+.form__signin{
+    padding-top: 50px;
+}
+
+.inp__signin{
+    width: 100%;
+    height: 25px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid rgb(210, 210, 210);
+    padding-left:10px;
+    margin-bottom: 40px;
+}
+
+.text__signin{
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
+.login{
+    width: 150px;
+    height: 35px;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.text__noneacc{
+    padding-top: 25px;
+    text-align: center;
+    letter-spacing: 0.2px;
+}
+
+.text__noneacc span{
+    font-weight:700;
+    cursor: pointer;
+    color: rgb(115, 0, 255);
+}
+
+.login:hover{
+    background: rgb(115, 0, 255);
+    transition: 0.5s;
+    color: #fff;
+}
+
+.exit{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.exit2{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.modal__login{
+    width: 500px;
+    height: 520px;
+    border: 1px solid rgb(210, 210, 210);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    border-radius: 10px;
+    z-index: 2;
+    background: #fff;
+}
+
+
+/* Genre */
+
+.fan__genre{
+    padding: 25px;
+    text-align: center;
+}
+
+.hor__genre{
+    padding: 25px;
+    text-align: center;
+}
+
+.det__genre{
+    padding: 18px;
+    text-align: center;
+}
+
+.dram__genre{
+    padding: 25px;
+    text-align: center;
+}
+
+.section__genre{
+    position: absolute;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.container__genre{
+    position: relative;
+    padding: 20px 10%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.class__genre{
+    padding: 10px;
+    border: 1px solid rgb(210, 210, 210);
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    background: white;
+}
+
+.class__genre a{
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 0 !important;
+}
+
+.class__genre:hover{
+    background: rgb(115, 0, 255);
+    color: #fff;
+}
+
+.class__genre:hover a{
+    color: #fff;
+}
+
+/* Banner */
+
+.background{
+    background-image: url(/img/banner/banner.jpg);
+    width: 50%;
+    height: 50vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+}
+
+.descrip__banner{
+    padding-top: 200px;
+}
+
+.container__banner{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #f8f9fb;
+}
+
+.title{
+    font-size: 72px;
+}
+
+.text__banner{
+    font-size: 24px
+}
+
+
+/* Card Home */
+
+.container__cardtop{
+    padding: 5% 10%;
+}
+
+.title__card{
+    font-size: 32px;
+}
+
+.cards__block{
+    padding: 5% 0;
+    width: 210px;
+    margin-right: 25px;
+}
+
+.block-filter-products{
+    display: flex;
+}
+
+.cards__block h3{
+    font-size: 21px;
+    text-align: center;
+    height: 50px;
+}
+
+.cards__block p{
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.cards__block p i{
+    padding-right:10px;
+    font-size: 21px;
+    color:#f07c29;
+}
+
+.btn__card{
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    font-size: 16px;
+    font-family:'Advent Pro', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn__card:hover{
+    background: rgb(115, 0, 255);
+    color: #fff;
+}
+
+.all__cards{
+    display: flex;
+    flex-wrap: wrap ;
+}
+
+.cards__block img{
+    width: 200px;
+    height: 305px;
+}
+
+.price{
+    color: #f07c29;
+}
+
+/* Best Seller */
+
+.container__bestseller{
+    padding: 5% 10%;
+    display: flex;
+}
+
+.title__bestseller{
+    font-size: 70px;
+    text-align: right;
+}
+
+.oversize{
+    width: 80%;
+    display: flex;
+}
+
+.cover{
+    width: 400px;
+    height: 600px;
+    margin-left: 15%;
+}
+
+.desc p{
+    padding-top: 10%;
+    font-size: 18px;
+    text-align: right;
+}
+
+.minisize{
+    margin-left: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cover__mini{
+    width: 170px;
+    height: 250px;
+    cursor: pointer;
+}
+
+.minisize h3{
+    padding-top: 10px;
+}
+
+.card-mini{
+    margin-left: 10px;
+}
+
+.desc{
+    width: 300px;
+}
+
+/* Footer */
+
+footer{
+    padding-top: 50px;
+}
+
+.container__footer{
+    background: black;
+    background-attachment: fixed;
+    padding: 50px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title__footer{
+    color: #fff;
+    font-size: 42px;
+}
+
+.text__contacts{
+    color:#fff;
+    font-size: 21px;
+}
+
+/* Cart */
+
+.carts{
+    width: 600px;
+    height: 500px;
+    position: absolute;
+    background: #fff;
+    top: 93px;
+    z-index: 2;
+    right: 0;
+    overflow-x: hidden;
+}
+
+.title__cart{
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.exit__cart{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.cartitem{
+    display: flex;
+    padding: 20px 0;
+}
+
+.imgitem{
+    width: 100px;
+    height: 120px;
+}
+
+.textitem{
+    margin-left: 30px;
+    font-size: 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.counter{
+    display: flex;
+}
+
+.count{
+    padding: 0 20px;
+}
+
+.plus{
+    cursor: pointer;
+}
+
+.minus{
+    cursor: pointer;
+}
+
+.price__cart{
+    color: #f07c29;
+}
+
+.title__total{
+    font-size: 21px;
+    margin-top: 50px;
+}
+
+.btn__buy{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn__buy{
+    padding: 10px 30px;
+    background: #fff;
+    border: 1px solid rgb(210, 210, 210);
+    font-family:'Advent Pro', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    color: black;
+}
+
+.btn__buy:hover{
+    background: rgb(115, 0, 255);
+    color: #fff;
+}
+
+.btn__buy-cart{
+ display: flex;
+ justify-content: center;
+ margin-top: 50px;
+}
+
+.btn__buy-cart button{
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border: 1px solid rgb(210, 210, 210);
+    font-family:'Advent Pro', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn__buy-cart button:hover{
+    background: rgb(115, 0, 255);
+    color: #fff;
+}
+
+.btn-minus{
+    border: 1px solid rgb(210, 210, 210);
+    padding: 0 10px;
+}
+
+.form_exit{
+    margin-left: 20px;
+}
+
+/* Scroll Bar */
+
+body::-webkit-scrollbar {
+    width: 12px;               /* ширина scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+    background: #adadad;        /* цвет дорожки */
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(138, 138, 138);    /* цвет плашки */
+    border-radius: 20px;       /* закругления плашки */
+    border: 0px solid #adadad;  /* padding вокруг плашки */
+  }
+
+.carts::-webkit-scrollbar{
+    width: 0px;
+}
+
+/* Cards in Genry */
+
+.container__cards{
+    margin-top: 100px;
+}
+
+/* Media */
+
+@media screen and (min-width: 1025px) and (max-width: 1899px) {
+    .oversize{
+        width: 60%;
+    }
+    .cover__mini{
+        width: 120px;
+        height: 175px;
+    }
+    .desc p{
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1900px){
+    .oversize{
+        width: 80%;
+    }
+    .cover__mini{
+        width: 170px;
+        height: 250px;
+    }
+    .decs p{
+        font-size: 18px;
+    }
+}
+
+@media (min-width:768px) and (max-width: 1024px){
+    .oversize{
+        width: 50%;
+    }
+    .cover{
+        width: 300px;
+        height: 600px;
+    }
+    .title__bestseller{
+        font-size: 52px;
+    }
+    .desc p{
+        font-size: 14px;
+    }
+    .cover__mini{
+        width: 130px;
+        height: 200px;
+    }
+    .search{
+        width: 200px;
+    }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+    flex: 1 0 auto;
+  
+}
+
+footer {
+    flex: 0 0 auto;
+}
+  
+.exit_btn{
+    width: 80px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgb(210, 210, 210);
+    padding: 0 10px;
+    cursor: pointer;
+    font-family:'Advent Pro', sans-serif;
+}
+
+.exit_btn:hover{
+    background: rgb(115, 0, 255);
+    color: #fff;
+}
+
+.links__menu{
+    align-items: center;
+}
+
+.btn-search{
+    position: absolute;
+    right: 10px;
+    background: #fff;
+    z-index: 10;
+    border: 1px solid rgb(210, 210, 210);
+    padding: 0 10px;
+    cursor: pointer;
+    font-family:'Advent Pro', sans-serif;
+    border-radius: 10px;
+}
+
+.form-search{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
